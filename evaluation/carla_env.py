@@ -101,7 +101,7 @@ class CarlaEnv:
 
         self.depth_camera = None
         self.depth_queue = None
-        if "depth" in sensors:
+        if "depth" in sensors: # 나중에 GENIE depth 사용 버전 고려한 세팅
             depth_bp = self.world.get_blueprint_library().find("sensor.camera.depth")
             depth_bp.set_attribute("image_size_x", str(CAMERA_WIDTH))
             depth_bp.set_attribute("image_size_y", str(CAMERA_HEIGHT))

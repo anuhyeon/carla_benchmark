@@ -64,10 +64,13 @@ def main():
     parser.add_argument("--checkpoint", required=True)
     parser.add_argument("--mode", choices=["rgb", "rgbd"], default="rgb")
     parser.add_argument("--subgoal-radius", type=float, default=2.0)
+    parser.add_argument("--subgoal-stride", type=int, default=1)
     parser.add_argument("--timeout", type=float, default=300.0)
     parser.add_argument("--waypoint-index", type=int, default=0)
     parser.add_argument("--display", action="store_true")
     args = parser.parse_args()
+    if args.subgoal_stride < 1:
+        parser.error("--subgoal-stride must be at least 1")
 
     if args.display:
         from visualizer import close, draw, setup
@@ -78,7 +81,10 @@ def main():
     policy.reset({"step_scale": episode["step_scale"]})
     env = CarlaEnv(episode, requirements["sensors"])
     controller = Controller(args.waypoint_index)
-    targets = episode["subgoals_world"]
+    all_targets = episode["subgoals_world"]
+    targets = all_targets[::args.subgoal_stride]
+    if (len(all_targets) - 1) % args.subgoal_stride != 0:
+        targets.append(all_targets[-1])
     inference_ticks = round(
         requirements["observation_interval"] / FIXED_DELTA_SECONDS
     )
