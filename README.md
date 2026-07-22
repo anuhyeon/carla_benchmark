@@ -139,9 +139,7 @@ python PythonAPI/benchmark/evaluation/rollout.py \
 | `--timeout` | 선택 | `300.0` | rollout 평가 제한 시뮬레이션 시간이며 단위는 초임. . |
 | `--display` | 선택 | 비활성 | Pygame 평가 창을 활성화함. Headless server에서는 생략하면 됨. |
 
-`--subgoal-stride`는 직선거리 간격을 의미 X. episode에 저장된 subgoal 순서에서 N개마다 선택하는 값. 예를 들어 원본 subgoal이 누적 경로거리 약 5m마다 저장되었다면 stride 2는 누적 경로거리 약 10m마다 선택하는 방식
-
-GENIE-SAMTP는 local BEV planner이므로 지나치게 큰 `--subgoal-stride`는 subgoal을 관측 범위 밖으로 보내 성능을 떨어뜨릴 수 있음. 먼저 기본값 1로 평가하는 것을 권장함.
+`--subgoal-stride`는 직선거리 간격의미X , episode에 저장된 subgoal 순서에서 N개마다 선택하는 값. 예를 들어 원본 subgoal이 누적 경로거리 약 5m마다 저장되었다면 stride 2는 누적 경로거리 약 10m마다 선택하는 방식
 
 ## 9. Episode 구조 
 
