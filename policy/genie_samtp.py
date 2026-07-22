@@ -5,8 +5,9 @@ import sys
 import numpy as np
 import yaml
 
+from runtime_config import POLICY_RUNTIME
 
-GENIE_ROOT = Path("/home/mobility/simulators/GENIE-SAMTP")
+GENIE_ROOT = Path(POLICY_RUNTIME["genie_samtp"]["project_root"])
 sys.path.insert(0, str(GENIE_ROOT))
 
 from genie_path_planner.io_utils import resolve_path

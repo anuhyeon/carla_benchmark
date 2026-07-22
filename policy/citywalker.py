@@ -8,8 +8,9 @@ import torch
 import torch.nn.functional as F
 import yaml
 
+from runtime_config import POLICY_RUNTIME
 
-CITYWALKER_ROOT = Path("/home/mobility/mobile_ws/citywalker")
+CITYWALKER_ROOT = Path(POLICY_RUNTIME["citywalker"]["project_root"])
 sys.path.insert(0, str(CITYWALKER_ROOT))
 
 from model.citywalker_feat import CityWalkerFeat
