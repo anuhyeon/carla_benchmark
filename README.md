@@ -48,7 +48,7 @@ python -m pip install pyzmq
 ```
 
 
-## 5. Policy Python과 project root 설정
+## 4. Policy Python과 project root 설정
 
 `PythonAPI/benchmark/policy/runtime_config.py`에 각 policy의 Python 실행 파일과 프로젝트 root 절대경로를 입력하면 됨.
 
@@ -69,7 +69,7 @@ POLICY_RUNTIME = {
 - `project_root`는 policy 디렉토러 위치
 
 
-## 6. CARLA server 실행
+## 5. CARLA server 실행
 
 ### Headless server
 
@@ -98,7 +98,7 @@ __NV_PRIME_RENDER_OFFLOAD=1 \
   -nosound \
 ```
 
-## 7. GENIE-SAMTP rollout 실행
+## 6. GENIE-SAMTP rollout 실행
 
 CARLA server가 완전히 실행된 뒤 다른 terminal에서 CARLA 평가 환경을 활성화하고 rollout을 실행하면 됨.
 
@@ -124,7 +124,7 @@ python PythonAPI/benchmark/evaluation/rollout.py \
   --display
 ```
 
-## 8. Rollout 인자
+## 7. Rollout 인자
 
 | 인자 | 필수 여부 | 기본값 | 역할 |
 |---|---:|---:|---|
@@ -141,7 +141,7 @@ python PythonAPI/benchmark/evaluation/rollout.py \
 
 `--subgoal-stride`는 직선거리 간격의미X , episode에 저장된 subgoal 순서에서 N개마다 선택하는 값. 예를 들어 원본 subgoal이 누적 경로거리 약 5m마다 저장되었다면 stride 2는 누적 경로거리 약 10m마다 선택하는 방식
 
-## 9. Episode 구조 
+## 8. Episode 구조 
 
 episode 디렉터리는 다음 구조 사용 (Image는 시각화용 안씅밈)
 
@@ -164,7 +164,7 @@ episodes/<episode_name>/
 에피소드 생성 코드는 잠시 보류
 
 
-## 10. 평가 결과
+## 9. 평가 결과
 
 평가 종료 후 metric을 terminal에 출력하고 다음 위치에 저장됨.
 
