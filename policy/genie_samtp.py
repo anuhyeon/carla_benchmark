@@ -159,9 +159,11 @@ class GeniePolicy:
                 "ready": True,
                 "status": "no_path",
                 "path_m": np.empty((0, 2), dtype=np.float32),
+                "planner_visualization": planned.visualization,
             }
         return {
             "ready": True,
             "status": "ok",
             "path_m": path[:, [1, 0]].astype(np.float32), #[forward, right]
+            "planner_visualization": planned.visualization,
         }

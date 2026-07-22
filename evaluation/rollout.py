@@ -101,7 +101,16 @@ def main():
     success = False
     user_quit = False
     max_ticks = round(args.timeout / FIXED_DELTA_SECONDS)
-    display = setup(observation["rgb"].shape[1], observation["rgb"].shape[0]) if args.display else None
+    planner_width = (
+        prediction["planner_visualization"].shape[1]
+        if args.policy == "genie_samtp"
+        else 0
+    )
+    display = (
+        setup(observation["rgb"].shape[1], observation["rgb"].shape[0], planner_width)
+        if args.display
+        else None
+    )
 
     for tick in range(max_ticks):
         observation = env.tick()

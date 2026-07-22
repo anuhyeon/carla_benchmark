@@ -5,11 +5,11 @@ import pygame
 PANEL_WIDTH = 360
 
 
-def setup(width, height):
+def setup(width, height, planner_width):
     pygame.init()
-    screen = pygame.display.set_mode((width + PANEL_WIDTH, height))
+    screen = pygame.display.set_mode((width + planner_width + PANEL_WIDTH, height))
     pygame.display.set_caption("CARLA Policy Rollout")
-    return screen, pygame.font.SysFont("monospace", 16, bold=True)
+    return screen, pygame.font.SysFont("monospace", 16, bold=True), planner_width
 
 
 def draw_route(screen, font, rect, targets, target_index, position, path):
@@ -52,6 +52,7 @@ def draw_route(screen, font, rect, targets, target_index, position, path):
 def draw(
     screen,
     font,
+    planner_width,
     observation,
     targets,
     target_index,
@@ -73,6 +74,17 @@ def draw(
     screen.blit(pygame.surfarray.make_surface(rgb.swapaxes(0, 1)), (0, 0))
     screen.blit(font.render("Front RGB", True, (255, 255, 255)), (8, 8))
 
+    if planner_width:
+        planner = prediction["planner_visualization"]
+        screen.blit(
+            pygame.surfarray.make_surface(planner.swapaxes(0, 1)),
+            (rgb.shape[1], 0),
+        )
+        screen.blit(
+            font.render("GENIE Plan", True, (255, 255, 255)),
+            (rgb.shape[1] + 8, 8),
+        )
+
     position = observation["actor_position"]
     distance = np.linalg.norm(position[:2] - targets[target_index][:2])
     lines = [
@@ -85,7 +97,7 @@ def draw(
         f"status: {prediction['status']}",
         "Q / ESC: quit",
     ]
-    panel_x = rgb.shape[1] + 16
+    panel_x = rgb.shape[1] + planner_width + 16
     for index, text in enumerate(lines):
         screen.blit(font.render(text, True, (235, 238, 242)), (panel_x, 16 + index * 22))
 
