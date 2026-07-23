@@ -41,7 +41,7 @@ git clone https://github.com/anuhyeon/carla_benchmark.git benchmark
 
 위 깃허브의 GENIE 세팅 완료후
 
-마찬가지로 worker 통신에 필요한 pyzmq를 설치
+해당 가상환경에서 마찬가지로 worker 통신에 필요한 pyzmq를 설치
 
 ```bash
 python -m pip install pyzmq
